@@ -1,0 +1,57 @@
+services:
+  backend:
+    build: ./socket-io-backend
+    ports:
+      - '4000:4000'
+    # depends_on:
+    #   - db
+    develop:
+      watch:
+        - action: sync
+          path: ./socket-io-backend
+          target: /app
+          ignore:
+            - node_modules/
+            - npm-debug.log
+            - dist/
+
+  frontend:
+    build: ./chat-frontend
+    ports:
+      - '3000:3000'
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+    develop:
+      watch:
+        - action: sync
+          path: ./chat-frontend
+          target: /app
+          ignore:
+            - node_modules/
+            - npm-debug.log
+            - dist/
+            - .next/
+            - out/
+
+  # db:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   environment:
+  #     SA_PASSWORD: 'Your_password123'
+  #     ACCEPT_EULA: 'Y'
+  #   ports:
+  #     - '1433:1433'
+  #   healthcheck:
+  #     test:
+  #       [
+  #         'CMD',
+  #         'sqlcmd',
+  #         '-U',
+  #         'sa',
+  #         '-P',
+  #         'Your_password123',
+  #         '-Q',
+  #         'select 1',
+  #       ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
