@@ -34,3 +34,21 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Code Quality: Linting and Formatting
+
+This project uses [ESLint](https://nextjs.org/docs/app/api-reference/config/eslint) with [Prettier](https://prettier.io/) for code quality and formatting.
+
+- To check for lint errors:
+
+```bash
+npm run lint
+```
+
+- To automatically format your code with Prettier:
+
+```bash
+npm run format
+```
+
+ESLint is configured to use the recommended Next.js and Prettier settings. Prettier config can be found in `.prettierrc`.
