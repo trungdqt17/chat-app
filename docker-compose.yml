@@ -1,26 +1,13 @@
 services:
-  backend:
-    build: ./socket-io-backend
-    ports:
-      - '4000:4000'
-    # depends_on:
-    #   - db
-    develop:
-      watch:
-        - action: sync
-          path: ./socket-io-backend
-          target: /app
-          ignore:
-            - node_modules/
-            - npm-debug.log
-            - dist/
-
   frontend:
-    build: ./chat-frontend
+    build:
+      context: ./chat-frontend
     ports:
       - '3000:3000'
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:4000
+    depends_on:
+      - backend
     develop:
       watch:
         - action: sync
@@ -32,6 +19,28 @@ services:
             - dist/
             - .next/
             - out/
+
+  backend:
+    build:
+      context: ./chat-backend
+      args:
+        ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+        ASPNETCORE_URLS: ${ASPNETCORE_URLS:-http://+:4000}
+    ports:
+      - '4000:4000'
+    env_file:
+      - .env
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ASPNETCORE_URLS=${ASPNETCORE_URLS:-http://+:4000}
+    develop:
+      watch:
+        - action: rebuild
+          path: ./chat-backend
+          target: /app
+          ignore:
+            - bin/
+            - obj/
 
   # db:
   #   image: mcr.microsoft.com/mssql/server:2022-latest

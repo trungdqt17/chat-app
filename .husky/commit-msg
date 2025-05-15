@@ -1,0 +1,1 @@
+yarn --cwd chat-frontend commitlint --edit $1

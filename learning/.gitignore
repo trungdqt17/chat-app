@@ -1,0 +1,8 @@
+# .NET build artifacts for learning module
+bin
+obj
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+

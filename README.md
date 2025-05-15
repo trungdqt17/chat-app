@@ -27,20 +27,12 @@ A demo real-time chat application featuring a Next.js frontend and a NestJS (Soc
    ```
 3. **Access the app:**
    - Frontend: [http://localhost:3000](http://localhost:3000)
-   - Backend API: [http://localhost:4000](http://localhost:4000)
 
 ### Enabling the Database (Optional)
 - Uncomment the `db` service and `depends_on` in `docker-compose.yml`.
 - The database will be available at `localhost:1433` (default SA password: `Your_password123`).
 
 ## Manual Development Setup
-
-### Backend (NestJS)
-```bash
-cd socket-io-backend
-npm install
-npm run start:dev
-```
 
 ### Frontend (Next.js)
 ```bash
